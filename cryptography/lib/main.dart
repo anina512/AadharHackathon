@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'crypto.dart';
 void main() {
   print("Executing Encryption");
-  EncryptData ed=new EncryptData();
-  print(ed.encrypt_file("D:\\Code\\Git stuff\\AadharHackathon\\Assets\\raw"));
+  print(EncryptData.encrypt_file("/storage/emulated/0/Download/one.pdf"));
   print("End of encryption");
   runApp(const MyApp());
 }

@@ -11,14 +11,10 @@ class EncryptData {
       encFilepath = crypt.encryptFileSync(path);
       print('The encryption has been completed successfully.');
       print('Encrypted file: $encFilepath');
-    } catch (e) {
-      if (e.type == AesCryptExceptionType.destFileExists) {
+    } catch ( e) {
         print('The encryption has been completed unsuccessfully.');
-        print(e.message);
-      }
-      else{
         return 'ERROR';
-      }
+
     }
     return encFilepath;
   }
@@ -34,13 +30,10 @@ class EncryptData {
       print('Decrypted file 1: $decFilepath');
       print('File content: ' + File(decFilepath).path);
     } catch (e) {
-      if (e.type == AesCryptExceptionType.destFileExists) {
+
         print('The decryption has been completed unsuccessfully.');
-        print(e.message);
-      }
-      else{
         return 'ERROR';
-      }
+
     }
     return decFilepath;
   }
