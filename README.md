@@ -1,1 +1,19 @@
-# AadharHackathon
+# Aadhaar Hackathon
+## Solution - Address Update
+Steps:-
+- Here the operator goes to the Aadhaar Holder wishing to update thhe address.
+- Scanning and uploading the documents.
+- Verifying the address of aadhaar holder with address in the document.
+- Editing of the address detected through OCR..
+- Verification of the address with GPS location.
+- Document, Extracted Address, Updated Address, Validation Outcome is stored in JSON Format
+
+## PPT 
+
+
+
+## Video Demonstaration of Application
+
+
+
+## Screenshots
