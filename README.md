@@ -12,10 +12,6 @@ Steps:-
 [Link To PPT](https://docs.google.com/presentation/d/1ft-3-7xOjnby6_P_ZIJgLo-GfNQeMXHjR70OFImuXas/edit?usp=sharing)
 
 
-## Video Demonstaration of Application
-
-
-
 ## Screenshots
 
 ![Screenshot_20211031-223203](https://user-images.githubusercontent.com/46997109/139595868-8061b48d-008f-4a76-ac26-ff35f4308fb9.jpg)
