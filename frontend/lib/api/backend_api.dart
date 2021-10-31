@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import "dart:convert";
 import 'dart:io';
 
-class ChatApi {
+class BackendApi {
   static const BaseUrl = "http://192.168.0.100:3000/";
 
   static Future upload(firebaseUrl) async {

@@ -4,10 +4,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_upload_example/api/firebase_api.dart';
+import 'package:firebase_upload_example/pdfviewer.dart';
+import 'package:firebase_upload_example/api/backend_api.dart';
 import 'package:firebase_upload_example/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:path/path.dart';
+import 'package:image_picker/image_picker.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +45,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   UploadTask? task;
   File? file;
+  PDFDocument? document;
+  // late final urlDownload;
+  bool _isLoading = true;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +66,12 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              ButtonWidget(
+                text: 'Scan File',
+                icon: Icons.camera,
+                onClicked: scanFile,
+              ),
+              SizedBox(height: 8),            
               ButtonWidget(
                 text: 'Select File',
                 icon: Icons.attach_file,
@@ -75,6 +90,19 @@ class _MainPageState extends State<MainPage> {
               ),
               SizedBox(height: 20),
               task != null ? buildUploadStatus(task!) : Container(),
+              ListTile(
+                title: Text('Load from URL'),
+                onTap: () {
+                    print("EYYYYYYYYYYYYYYYYYYYYYYYYYY-1111");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PDFView(
+                              data: "http://conorlastowka.com/book/CitationNeededBook-Sample.pdf",
+                            )),
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -91,6 +119,19 @@ class _MainPageState extends State<MainPage> {
     setState(() => file = File(path));
   }
 
+    Future scanFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+
+    if (result == null) return;
+    final path = result.files.single.path!;
+
+    setState(() => file = File(path));
+  }
+
+   void chooseImage(ImageSource source) async {
+     
+  }
+
   Future uploadFile() async {
     if (file == null) return;
 
@@ -104,10 +145,13 @@ class _MainPageState extends State<MainPage> {
 
     final snapshot = await task!.whenComplete(() {});
     final urlDownload = await snapshot.ref.getDownloadURL();
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    print(
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     print('Download-Link: $urlDownload');
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    print(
+        "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     print('Download-Link: $file');
+    var res = await BackendApi.upload(urlDownload);
 
   }
 
