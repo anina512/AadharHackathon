@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967476746454",
+    "project_id": "aadhar-c661e",
+    "storage_bucket": "aadhar-c661e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967476746454:android:98be909b3c37d101281177",
+        "android_client_info": {
+          "package_name": "com.example.aadhar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967476746454-740sc7d295cbjtplsh8hgtj5jdg5cinh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa9R9gLDYDygKs1WoZOwmvPSVnd54rvXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967476746454-740sc7d295cbjtplsh8hgtj5jdg5cinh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
