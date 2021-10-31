@@ -67,7 +67,13 @@ class _MainPageState extends State<MainPage> {
                 fileName,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
-              SizedBox(height: 48),
+              ButtonWidget(
+                text: 'Create File',
+                icon: Icons.camera_alt_outlined,
+                onClicked: selectFile,///TODO change this
+              ),
+              SizedBox(height: 8),
+              // SizedBox(height: 48),
               ButtonWidget(
                 text: 'Upload File',
                 icon: Icons.cloud_upload_outlined,
