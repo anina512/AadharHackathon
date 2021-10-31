@@ -20,19 +20,20 @@ class _SelectAddressState extends State<SelectAddress> {
         title: const Text('Select address'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 32.0,horizontal: 16.0),
         child: Column(
           children: <Widget>[
             SelectableText(
                 widget.address,
-                toolbarOptions: const ToolbarOptions(copy: false)
+                toolbarOptions: const ToolbarOptions(copy: true),
+                style: TextStyle(fontSize: 20)
             ),
             const SizedBox(height: 40,),
             MaterialButton(
               onPressed:()async{
                 String? Address= await getClipBoardData();
                 if(Address!=null){
-                  print("address: "+Address);
+                  Navigator.pushNamed(context, '/editAddress',arguments: {'address':Address});
                 }
               },
               color: Colors.redAccent,
