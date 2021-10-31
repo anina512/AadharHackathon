@@ -9,7 +9,7 @@ Steps:-
 - Document, Extracted Address, Updated Address, Validation Outcome is stored in JSON Format
 
 ## PPT 
-
+[Link To PPT](https://docs.google.com/presentation/d/1ft-3-7xOjnby6_P_ZIJgLo-GfNQeMXHjR70OFImuXas/edit?usp=sharing)
 
 
 ## Video Demonstaration of Application
