@@ -38,7 +38,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_mobile_vision: ^0.1.4+1
+  geolocator: 7.6.2
+  geocoding: ^2.0.1
 
 
   # The "flutter_lints" package below contains a set of recommended lints to

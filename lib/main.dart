@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ocr_address_ext/select_address.dart';
+import 'addloc.dart';
 import 'edit_address.dart';
+import 'gpsloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   final String addressFromOCR ="""
 It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
 The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
-'Content here, content here', making it look like readable English. 416, Navrang Arcade, Gokhale Road, Nxt Alok Hotel, Thane (west).,
+'Content here, content here', making it look like readable English. 1201-04, Sanctura, Senroofs, Mulund Goregaon link road, Nahur east, Mumbai-400081, Maharashtra
 Many, desktop, publishing, packages, and, web, page editors now use Lorem
 Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
  Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).""";
@@ -29,6 +31,8 @@ Ipsum as their default model text, and a search for 'lorem ipsum' will uncover m
         '/selectAddress': (context) => SelectAddress(address: addressFromOCR),
         //'/extractAddress': (context) => SelectAddress(address: addressFromOCR),
         '/editAddress': (context) => EditAddress(),
+        '/validateCurrentAddress': (context) => GPSLoc(),
+        '/sec_valid':(context) => Validation(),
 
 
       },

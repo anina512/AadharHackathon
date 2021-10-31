@@ -33,8 +33,12 @@ class _SelectAddressState extends State<SelectAddress> {
               onPressed:()async{
                 String? Address= await getClipBoardData();
                 if(Address!=null){
-                  Navigator.pushNamed(context, '/editAddress',arguments: {'address':Address});
+                  Navigator.pushNamed(context, '/validateCurrentAddress',arguments: {'address':Address});
                 }
+
+                // if(Address!=null){
+                //   Navigator.pushNamed(context, '/editAddress',arguments: {'address':Address});
+                // }
               },
               color: Colors.redAccent,
 

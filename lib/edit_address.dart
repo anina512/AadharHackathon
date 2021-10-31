@@ -13,7 +13,7 @@ class _EditAddressState extends State<EditAddress> {
   List addressParts=[];
   var addressPartsLength=0;
   List modifiedAddressParts=List.filled(8, "", growable: false);
-  List finalAddress=[];
+  List finalAddressList=List.filled(8, "", growable: false);
 
 
 
@@ -28,10 +28,12 @@ class _EditAddressState extends State<EditAddress> {
 
     for(int i =0;i<addressPartsLength;i++){print(addressParts[i]);}
     modifiedAddressParts=List.from(addressParts);
+    finalAddressList=List.from(addressParts);
     print(addressPartsLength);
     if(addressPartsLength<8){
       for(int i=0;i<(8-addressPartsLength);i++){
         modifiedAddressParts.add(null);
+        finalAddressList.add(null);
       }
     }
     print(modifiedAddressParts);
@@ -52,7 +54,10 @@ class _EditAddressState extends State<EditAddress> {
                               width: 200,
                               child: TextFormField(
                                 initialValue: modifiedAddressParts[0],
-                                onChanged: (text){finalAddress[0]=text;},
+                                onChanged: (text){
+                                  finalAddressList[0]=text;
+
+                                },
 
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -71,7 +76,10 @@ class _EditAddressState extends State<EditAddress> {
                               width: 200,
                               child: TextFormField(
                                 initialValue: modifiedAddressParts[1],
-                                onChanged: (text){finalAddress[1]=text;},
+                                onChanged: (text){
+                                  finalAddressList[1]=text;
+
+                                },
 
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -90,7 +98,9 @@ class _EditAddressState extends State<EditAddress> {
                               width: 200,
                               child: TextFormField(
                                 initialValue: modifiedAddressParts[2],
-                                onChanged: (text){finalAddress[2]=text;},
+                                onChanged: (text){
+                                  finalAddressList[2]=text;
+                                },
 
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -109,7 +119,9 @@ class _EditAddressState extends State<EditAddress> {
                               width: 200,
                               child: TextFormField(
                                 initialValue: modifiedAddressParts[3] ,
-                                onChanged: (text){finalAddress[3]=text;},
+                                onChanged: (text){
+                                  finalAddressList[2]=text;
+                                },
 
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -128,7 +140,9 @@ class _EditAddressState extends State<EditAddress> {
                               width: 200,
                               child: TextFormField(
                                 initialValue: modifiedAddressParts[4],
-                                onChanged: (text){finalAddress[4]=text;},
+                                onChanged: (text){
+                                  finalAddressList[4]=text;
+                                },
 
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -146,7 +160,9 @@ class _EditAddressState extends State<EditAddress> {
                               width: 200,
                               child: TextFormField(
                                 initialValue: modifiedAddressParts[5] ,
-                                onChanged: (text){finalAddress[5]=text;},
+                                onChanged: (text){
+                                  finalAddressList[5]=text;
+                                },
 
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -165,7 +181,9 @@ class _EditAddressState extends State<EditAddress> {
                               width: 200,
                               child: TextFormField(
                                 initialValue: modifiedAddressParts[6],
-                                onChanged: (text){finalAddress[6]=text;},
+                                onChanged: (text){
+                                  finalAddressList[6]=text;
+                                },
 
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -186,7 +204,9 @@ class _EditAddressState extends State<EditAddress> {
                               child: TextFormField(
 
                                 initialValue: modifiedAddressParts[7],
-                                onChanged: (text){finalAddress[7]=text;},
+                                onChanged: (text){
+                                  finalAddressList[7]=text;
+                                },
 
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
@@ -197,9 +217,18 @@ class _EditAddressState extends State<EditAddress> {
                           ],
                         ),
                         MaterialButton(
-                          onPressed:()async{
+                          onPressed:() async{
+                            print(finalAddressList);
+                            for(int i=0; i<8;i++){
+                              print(finalAddressList[i]);
+                              if(finalAddressList[i]==null){
+                                finalAddressList[i]=" ";
+                              }
+                            }
+                            print(finalAddressList);
 
-
+                            String finalAddress=finalAddressList.join();
+                            Navigator.pushNamed(context, '/sec_valid',arguments:{'address':address, 'edited_address':finalAddress});
                           },
                           color: Colors.redAccent,
 
