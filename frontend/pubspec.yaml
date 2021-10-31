@@ -7,7 +7,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  advance_pdf_viewer: ^2.0.0
   cupertino_icons: ^1.0.2
 
   # upload file to firebase
@@ -17,7 +16,9 @@ dependencies:
   # pick file
   file_picker: ^3.0.1
   image_picker: ^0.8.4+4
-  flutter_genius_scan: ^4.1.4
+  geolocator: 7.6.2
+  geocoding: ^2.0.1 
+
 
 dev_dependencies:
   flutter_test:

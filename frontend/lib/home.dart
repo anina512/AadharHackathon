@@ -24,13 +24,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final ImagePicker _picker = ImagePicker();
   var _extractedText = '';
-  void extractOCRText(XFile? image) async{
-    var data = await getData(Uri.parse('http://74d4-45-115-187-157.ngrok.io/'), image);
+  void extractOCRText(XFile? image) async {
+    var data =
+        await getData(Uri.parse('http://5eec-45-115-187-157.ngrok.io/'), image);
     var decodedData = await jsonDecode(jsonEncode(data));
     decodedData = json.decode(decodedData);
     _extractedText = decodedData['query'];
     print(_extractedText);
   }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -49,8 +51,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ElevatedButton(
           child: Text("Get OCR"),
           onPressed: () async {
-              final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-              extractOCRText(image);
+            final XFile? image =
+                await _picker.pickImage(source: ImageSource.gallery);
+            extractOCRText(image);
+            Future.delayed(Duration(seconds: 70), () {
+              print("Executed after 60 seconds");
+                 Navigator.pushNamed(context, '/selectAddress',
+                arguments: {"address": _extractedText});
+            });
+
+         
           },
         ),
       ),

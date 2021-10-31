@@ -5,14 +5,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_upload_example/api/firebase_api.dart';
 import 'package:firebase_upload_example/home.dart';
-import 'package:firebase_upload_example/pdfviewer.dart';
+//import 'package:firebase_upload_example/pdfviewer.dart';
 import 'package:firebase_upload_example/api/backend_api.dart';
 import 'package:firebase_upload_example/widget/button_widget.dart';
+import 'package:firebase_upload_example/widget/proceed_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:path/path.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'addloc.dart';
+import 'edit_address.dart';
+import 'gpsloc.dart';
+import 'select_address.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +36,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+    routes: {
+      '/selectAddress': (context) => SelectAddress(),
+      //'/extractAddress': (context) => SelectAddress(address: addressFromOCR),
+      '/editAddress': (context) => EditAddress(),
+      '/validateCurrentAddress': (context) => GPSLoc(),
+      '/sec_valid':(context) => Validation(),
+
+    },
         debugShowCheckedModeBanner: false,
         title: title,
         theme: ThemeData(primarySwatch: Colors.green),
@@ -46,10 +59,10 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   UploadTask? task;
   File? file;
-  PDFDocument? document;
+  // PDFDocument? document;
   // late final urlDownload;
-  bool _isLoading = true;
-
+  // bool _isLoading = true;
+  double progress = 0.00;
   @override
   Widget build(BuildContext context) {
     final fileName = file != null ? basename(file!.path) : 'No File Selected';
@@ -65,19 +78,19 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ButtonWidget(
-                text: 'Scan File',
-                icon: Icons.camera,
-                onClicked: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MyHomePage(title: 'OCR',),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(height: 8),
+              // ButtonWidget(
+              //   text: 'Scan File',
+              //   icon: Icons.camera,
+              //   onClicked: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => MyHomePage(title: 'OCR',),
+              //       ),
+              //     );
+              //   },
+              // ),
+              // SizedBox(height: 8),
               ButtonWidget(
                 text: 'Select File',
                 icon: Icons.attach_file,
@@ -160,21 +173,41 @@ class _MainPageState extends State<MainPage> {
     // var res = await BackendApi.upload(urlDownload);
   }
 
-  Widget buildUploadStatus(UploadTask task) => StreamBuilder<TaskSnapshot>(
-        stream: task.snapshotEvents,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final snap = snapshot.data!;
-            final progress = snap.bytesTransferred / snap.totalBytes;
-            final percentage = (progress * 100).toStringAsFixed(2);
+   Widget buildUploadStatus(UploadTask task) {
 
-            return Text(
-              '$percentage %',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            );
-          } else {
-            return Container();
-          }
-        },
-      );
+    return StreamBuilder<TaskSnapshot>(
+      stream: task.snapshotEvents,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final snap = snapshot.data!;
+          progress = snap.bytesTransferred / snap.totalBytes;
+          print("#######################");
+          print(progress);
+          final percentage = (progress * 100).toStringAsFixed(2);
+
+          return progress != 1.0
+              ? Text(
+                  '$percentage %',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                )
+              : ButtonWidgetProceed(
+                  text: 'Proceed',
+                  icon: Icons.camera,
+                  onClicked: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyHomePage(
+                          title: 'OCR',
+                        ),
+                      ),
+                    );
+                  },
+                );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
 }
